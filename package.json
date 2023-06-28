@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c && qjsc -o dist/ansibin_convert -flto -fno-eval -fno-string-normalize -fno-bigint -fno-proxy -fno-module-loader dist/bundle.js && strip dist/ansibin_convert",
+    "fmt": "prettier -w src/*.js *.js"
+  },
+  "license": "SEE LICENSE IN be gay do crime",
+  "type": "module",
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.3",
+    "prettier": "^2.8.8",
+    "rollup": "^3.25.3",
+    "xterm-headless": "^5.2.1"
+  }
+}
