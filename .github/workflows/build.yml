@@ -1,0 +1,31 @@
+name: build
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-20.04 # to build against older glibc
+    steps:
+      - uses: actions/checkout@v3
+      - name: install node
+        uses: actions/setup-node@v2.5.2
+        with:
+          node-version: lts
+      - name: build
+        run: |
+          git clone github.com/bellard/quickjs --depth 1
+          cd quickjs
+          make install
+          cd ..
+          corepack enable
+          corepack prepare pnpm@latest --activate
+          pnpm install --frozen-lockfile
+          pnpm run build
+      - name: upload
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: ansibin_convert
+          path: dist/ansibin_convert
