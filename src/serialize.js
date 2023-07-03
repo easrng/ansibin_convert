@@ -592,8 +592,8 @@ export class HTMLSerializeHandler extends BaseSerializeHandler {
       const fgHexColor = this._getHexColor(cell, true);
       const bgHexColor = this._getHexColor(cell, false);
       content.push(
-        fgHexColor || "",
-        bgHexColor || "",
+        (fgHexColor === 0 || fgHexColor) ? fgHexColor : "",
+        (bgHexColor === 0 || bgHexColor) ? bgHexColor : "",
         cell.isInverse() ? 1 : 0,
         cell.isBold() ? 1 : 0,
         cell.isUnderline() ? 1 : 0,
